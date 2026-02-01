@@ -125,7 +125,7 @@ mpc_global_parameters:
   # ----------------------------
   # MPC horizon / timing settings
   # ----------------------------
-  K:              12         # Number of total steps. | -
+  K:              1         # Number of total steps. | -
   Delta_t:        300        # Time interval. | s
   gamma:          0.99       # Discount factor. | -
 

@@ -211,6 +211,9 @@ def modeling_solving_qmpc_deterministic_problem(
         obj += (gamma ** k) * stage_cost
 
     mpc.setObjective(obj, GRB.MINIMIZE)
+
+    # mpc.write("/Users/xianbangchen/Desktop/xxx/qmpc.lp")
+
     mpc.optimize()
 
     status = int(mpc.Status)
