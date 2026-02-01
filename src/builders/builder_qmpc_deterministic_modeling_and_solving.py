@@ -29,14 +29,6 @@ class QmpcSolveResult:
     solve_time_s: Optional[float]
 
 
-def _L_DLI_star(kappa: int, steps_per_day: int, ramp_start: int, ramp_end: int, target: float) -> float:
-    if kappa < ramp_start:
-        return 0.0
-    if kappa < ramp_end:
-        return float(target) * float(kappa - ramp_start) / float(ramp_end - ramp_start)
-    return float(target)
-
-
 def modeling_solving_qmpc_deterministic_problem(
     *,
     model: Any,
@@ -177,7 +169,14 @@ def modeling_solving_qmpc_deterministic_problem(
         T_star = 0.5 * (T_in_under + T_in_bar)
         Z_star = 0.5 * (Z_in_under + Z_in_bar)
         B_star = 0.5 * (B_in_under + B_in_bar)
-        L_star = _L_DLI_star(kappa_at(k), steps_per_day, ramp_start_step, ramp_end_step, L_DLI_target)
+        if kappa_at(k) < ramp_start_step:
+            L_star = 0.0
+        elif kappa_at(k) < ramp_end_step:
+            L_star = float(L_DLI_target) * float(kappa_at(k) - ramp_start_step) / float(
+                ramp_end_step - ramp_start_step
+            )
+        else:
+            L_star = float(L_DLI_target)
 
         mpc.addConstr(x[k, T_in_idx] >= T_in_under + S_T_minus[k], name=f"T_under_{k}")
         mpc.addConstr(x[k, T_in_idx] <= T_in_bar + S_T_plus[k], name=f"T_bar_{k}")

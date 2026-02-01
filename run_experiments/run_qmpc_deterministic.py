@@ -125,6 +125,14 @@ def _horizon_end_time(
     return t0 + timedelta(seconds=float(K) * float(dt_s))
 
 
+def _L_DLI_star(kappa: int, steps_per_day: int, ramp_start: int, ramp_end: int, target: float) -> float:
+    if kappa < ramp_start:
+        return 0.0
+    if kappa < ramp_end:
+        return float(target) * float(kappa - ramp_start) / float(ramp_end - ramp_start)
+    return float(target)
+
+
 def _resolve_affine_dynamics_dir(model_block: Dict[str, Any]) -> Path:
     raw = Path(model_block["affine_dynamics_dir"])
     base = raw if raw.is_absolute() else (REPO / raw).resolve()
