@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -45,6 +46,12 @@ def _read_yaml(path: Path) -> Dict[str, Any]:
 
 def _current_step_information_path() -> Path:
     return CURRENT_STEP_INFORMATION_JSON
+
+
+def _reset_results_dir() -> None:
+    if RESULTS_DIR.exists():
+        shutil.rmtree(RESULTS_DIR)
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def _load_or_init_current_step_information(defs, keeper: Dict[str, Any]) -> Dict[str, Any]:
@@ -361,6 +368,8 @@ def main() -> None:
     keeper = _read_yaml(KEEPER_YAML)
     mpc = keeper["mpc_global_parameters"]
     solver_options = settings.get("solver", {}).get("options", {})
+
+    _reset_results_dir()
 
     model = load_one_step_euler_from_yamls()
     defs = model.defs
