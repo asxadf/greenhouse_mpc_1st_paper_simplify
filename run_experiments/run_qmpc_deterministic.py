@@ -404,6 +404,7 @@ def main() -> None:
     total_steps = min(total_steps, D_real.shape[0])
     remaining = max(0, total_steps - int(info["step_index"]))
 
+    # Affine matrices represent x_{k+1} = M x_k + N u_k + O d_k + m.
     affine = _load_affine_matrices(settings["model"])
     dli_idx = defs.state_idx.get("L_DLI")
     day_start = int(mpc["L_DLI_profile"]["ramp_start_step"])

@@ -175,6 +175,7 @@ if __name__ == "__main__":
             "control": model.defs.control_names,
             "disturbance": model.defs.disturbance_names,
         },
+        "model_form": "x_{k+1} = M x_k + N u_k + O d_k + m",
         "model_params_snapshot": asdict(model.params),
     }
     meta_path.write_text(json.dumps(meta, indent=2), encoding="utf-8")
