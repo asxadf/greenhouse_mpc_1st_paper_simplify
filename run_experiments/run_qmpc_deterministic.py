@@ -122,7 +122,23 @@ def _fmt_dt(dt_s: float) -> str:
 
 
 def _status_name(status: int) -> str:
-    return "Solve_Succeeded" if status == 0 else "Unknown"
+    mapping = {
+        2: "OPTIMAL",
+        3: "INFEASIBLE",
+        4: "INF_OR_UNBD",
+        5: "UNBOUNDED",
+        6: "CUTOFF",
+        7: "ITERATION_LIMIT",
+        8: "NODE_LIMIT",
+        9: "TIME_LIMIT",
+        10: "SOLUTION_LIMIT",
+        11: "INTERRUPTED",
+        12: "NUMERIC",
+        13: "SUBOPTIMAL",
+        14: "INPROGRESS",
+        15: "USER_OBJ_LIMIT",
+    }
+    return mapping.get(int(status), "Unknown")
 
 
 def _horizon_end_time(
@@ -193,10 +209,10 @@ def _print_step_block(
     print(f"Controller         : {controller}")
     print(f"Look-ahead window  : [{t0s} → {tKs}]  (K={K}, K_eff={K_eff}, Δt={_fmt_dt(dt_s)})")
     print()
-    print("[1] Solving MPC (NMPC)...")
+    print("[1] Solving MPC (QMPC)...")
     iters_str = "N/A" if solve_iters is None else str(solve_iters)
     print(
-        f"Finished solving (NMPC).  status={solve_status} ({_status_name(solve_status)})"
+        f"Finished solving (QMPC).  status={solve_status} ({_status_name(solve_status)})"
         f"  iters={iters_str}  objective= {objective: .6f}  solve_time={solve_time_s:.3f}s"
     )
     print()
