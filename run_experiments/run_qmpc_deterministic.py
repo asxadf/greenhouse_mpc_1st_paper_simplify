@@ -90,11 +90,12 @@ def _load_disturbance_csv(path: Path, defs) -> Tuple[np.ndarray, List[str]]:
     return d, timestamps
 
 
-def _slice_horizon(D: np.ndarray, i: int, K: int) -> np.ndarray:
+def _slice_horizon(D: np.ndarray, i: int, K: int) -> Tuple[np.ndarray, int]:
     if i + K <= D.shape[0]:
-        return D[i : i + K]
+        return D[i : i + K], K
+    K_eff = max(0, D.shape[0] - i)
     pad = np.repeat(D[-1:], repeats=i + K - D.shape[0], axis=0)
-    return np.concatenate([D[i:], pad], axis=0)
+    return np.concatenate([D[i:], pad], axis=0), K_eff
 
 
 def _parse_iso(ts: Optional[str]) -> Optional[datetime]:
@@ -243,7 +244,7 @@ def main() -> None:
     D_real, real_ts = _load_disturbance_csv(OUTDOOR_REALIZATION_CSV, defs)
 
     K = int(keeper["mpc_global_parameters"]["K"])
-    d_pred_h = _slice_horizon(D_pred, step_index, K)
+    d_pred_h, K_eff = _slice_horizon(D_pred, step_index, K)
     d_real_i = D_real[min(step_index, D_real.shape[0] - 1)]
 
     affine = _load_affine_matrices(settings["model"])
@@ -254,6 +255,7 @@ def main() -> None:
         d_pred_h=d_pred_h,
         d_realization=d_real_i,
         step_index=step_index,
+        K=K_eff,
         mpc_global_parameters=keeper["mpc_global_parameters"],
         affine=affine,
         solver_options=settings.get("solver", {}).get("options", {}),

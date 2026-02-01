@@ -36,6 +36,7 @@ def modeling_solving_qmpc_deterministic_problem(
     d_pred_h: np.ndarray,
     d_realization: np.ndarray,
     step_index: int,
+    K: int,
     mpc_global_parameters: Dict[str, Any],
     affine: AffineDynamicsMatrices,
     solver_options: Optional[Dict[str, Any]] = None,
@@ -59,7 +60,7 @@ def modeling_solving_qmpc_deterministic_problem(
     U_dehum_idx = defs.control_idx["U_dehum"]
     U_dos_idx = defs.control_idx["U_dos"]
 
-    K = int(mpc_global_parameters["K"])
+    K = int(K)
     Delta_t = float(mpc_global_parameters["Delta_t"])
     steps_per_day = int(mpc_global_parameters["steps_per_day"])
     gamma = float(mpc_global_parameters["gamma"])
