@@ -1,0 +1,31 @@
+{
+  "created_at": "20260131_202319",
+  "dataset_path": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/random_samples/dataset.npz",
+  "random_samples_dir": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/random_samples",
+  "results_dir": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results",
+  "n_samples": 60000,
+  "n_train": 48000,
+  "n_test": 12000,
+  "n_x": 4,
+  "n_u": 10,
+  "n_d": 4,
+  "spectral_radius_M": 1.0517018224613537,
+  "exports": {
+    "M": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/M_matrix.csv",
+    "N": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/N_matrix.csv",
+    "O": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/O_matrix.csv",
+    "m": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/m_bias.csv"
+  },
+  "scores": {
+    "test_delta_mse": 0.23140805603783146,
+    "test_delta_mae": 0.2983100397833637,
+    "train_delta_mse": 0.2307407232153322,
+    "train_delta_mae": 0.2971606941169045,
+    "test_delta_r2_avg": 0.8533797958487601,
+    "train_delta_r2_avg": 0.8551574720940264
+  },
+  "saved": {
+    "matrices": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/fitted_matrices.npz",
+    "metadata": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/fitted_matrices_meta.json"
+  }
+}

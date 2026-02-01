@@ -1,0 +1,22 @@
+# configs/setting_nmpc.yaml
+controller:
+  type: "nmpc"
+
+solver:
+  name: "ipopt"
+  warm_start: true
+  suppress_solver_logs: true
+  fd_eps: 1.0e-6   # <-- add this
+
+  options:
+    max_iter: 2000
+    tol: 1.0e-6
+    max_cpu_time: 300.0
+    acceptable_tol: 3.0e-6
+    dual_inf_tol: 1.0e-6
+    constr_viol_tol: 1.0e-6
+    compl_inf_tol: 1.0e-6
+    mu_strategy: "adaptive"
+    linear_solver: "mumps"
+    print_level: 0
+    sb: "yes"
