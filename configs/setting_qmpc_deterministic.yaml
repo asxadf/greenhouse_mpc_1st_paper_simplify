@@ -1,4 +1,4 @@
-# configs/setting_qmpc.yaml
+# configs/setting_qmpc_deterministic.yaml
 controller:
   type: "qmpc"
 

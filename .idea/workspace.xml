@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fb488295-3fe6-487c-9a03-13765a9681a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/setting_lmpc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/setting_qmpc.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_experiments/generate_qmpc_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_experiments/generate_qmpc_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_experiments/run_nmpc.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_experiments/run_nmpc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_experiments/run_qmpc_deterministic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/builder_1_indoor_climate_one_step_Euler.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/builder_indoor_climate_one_step_Euler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/builder_2_nmpc_modeling_and_solving.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/builders/builder_nmpc_modeling_and_solving.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/builders/builder_3_qmpc_deterministic_modeling_and_solving.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/setting_qmpc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/setting_qmpc_deterministic.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +83,7 @@
       <updated>1769817136561</updated>
       <workItem from="1769817137617" duration="32718000" />
       <workItem from="1769902310205" duration="4448000" />
-      <workItem from="1769909522939" duration="2925000" />
+      <workItem from="1769909522939" duration="3818000" />
     </task>
     <servers />
   </component>
