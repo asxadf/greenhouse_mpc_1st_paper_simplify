@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb488295-3fe6-487c-9a03-13765a9681a0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/run_experiments/run_qmpc_deterministic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/builders/builder_qmpc_deterministic_modeling_and_solving.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/setting_qmpc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/setting_qmpc_deterministic.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/variable_and_parameter_keeper.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/variable_and_parameter_keeper.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +29,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="38zzM8Njh8SSLQeJ7Zi8OCCHAfh" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -64,6 +68,9 @@
       <recent name="$PROJECT_DIR$/data/processed" />
       <recent name="$PROJECT_DIR$/configs" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/run_experiments" />
+    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -83,7 +90,7 @@
       <updated>1769817136561</updated>
       <workItem from="1769817137617" duration="32718000" />
       <workItem from="1769902310205" duration="4448000" />
-      <workItem from="1769909522939" duration="3818000" />
+      <workItem from="1769909522939" duration="5763000" />
     </task>
     <servers />
   </component>
@@ -92,7 +99,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/greenhouse_mpc_1st_paper_simplify$fit_qmpc_matrices.coverage" NAME="fit_qmpc_matrices Coverage Results" MODIFIED="1769908999076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/run_experiments" />
-    <SUITE FILE_PATH="coverage/greenhouse_mpc_1st_paper_simplify$run_qmpc_deterministic.coverage" NAME="run_qmpc_deterministic Coverage Results" MODIFIED="1769912239726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/run_experiments" />
+    <SUITE FILE_PATH="coverage/greenhouse_mpc_1st_paper_simplify$run_qmpc_deterministic.coverage" NAME="run_qmpc_deterministic Coverage Results" MODIFIED="1769915048250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/run_experiments" />
     <SUITE FILE_PATH="coverage/greenhouse_mpc_1st_paper_simplify$fit_lmpc_matrices.coverage" NAME="fit_lmpc_matrices Coverage Results" MODIFIED="1769907879893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/run_experiments" />
     <SUITE FILE_PATH="coverage/greenhouse_mpc_1st_paper_simplify$builder_2_nmpc_modeling_and_solving.coverage" NAME="builder_2_nmpc_modeling_and_solving Coverage Results" MODIFIED="1769893268800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/builders" />
     <SUITE FILE_PATH="coverage/greenhouse_mpc_1st_paper_simplify$generate_qmpc_dataset.coverage" NAME="generate_qmpc_dataset Coverage Results" MODIFIED="1769908987743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/run_experiments" />
