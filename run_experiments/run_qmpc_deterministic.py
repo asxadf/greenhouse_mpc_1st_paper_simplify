@@ -253,7 +253,6 @@ def main() -> None:
         model=model,
         x_ini=x_ini,
         d_pred_h=d_pred_h,
-        d_realization=d_real_i,
         step_index=step_index,
         K=K_eff,
         mpc_global_parameters=keeper["mpc_global_parameters"],
@@ -261,9 +260,11 @@ def main() -> None:
         solver_options=settings.get("solver", {}).get("options", {}),
     )
 
+    x_next = np.asarray(model.step(x_ini, result.u0, d_real_i), dtype=float)
+
     info = {
         "step_index": step_index + 1,
-        "x": result.x_next.tolist(),
+        "x": x_next.tolist(),
     }
     _save_current_step_information(info)
 
@@ -286,7 +287,7 @@ def main() -> None:
     print(f"objective  : {result.objective}")
 
     _print_named("u0 (control)", defs.control_names, result.u0)
-    _print_named("x_next (digital twin)", defs.state_names, result.x_next)
+    _print_named("x_next (digital twin)", defs.state_names, x_next)
 
 
 if __name__ == "__main__":

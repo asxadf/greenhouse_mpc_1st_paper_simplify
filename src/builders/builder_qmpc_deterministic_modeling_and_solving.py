@@ -21,7 +21,6 @@ class AffineDynamicsMatrices:
 class QmpcSolveResult:
     U_opt: np.ndarray
     u0: np.ndarray
-    x_next: np.ndarray
     success: bool
     objective: float
     status: int
@@ -34,13 +33,13 @@ def modeling_solving_qmpc_deterministic_problem(
     model: Any,
     x_ini: np.ndarray,
     d_pred_h: np.ndarray,
-    d_realization: np.ndarray,
     step_index: int,
     K: int,
     mpc_global_parameters: Dict[str, Any],
     affine: AffineDynamicsMatrices,
     solver_options: Optional[Dict[str, Any]] = None,
 ) -> QmpcSolveResult:
+    """This module only builds and solves the QP; rollout is handled by the runner."""
     defs = model.defs
     params = model.params
 
@@ -229,12 +228,9 @@ def modeling_solving_qmpc_deterministic_problem(
         objective = float("nan")
         message = "Solve_Failed"
 
-    x_next = np.asarray(model.step(x_ini, u0, d_realization), dtype=float)
-
     return QmpcSolveResult(
         U_opt=U_opt,
         u0=u0,
-        x_next=x_next,
         success=success,
         objective=objective,
         status=status,
