@@ -10,7 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.builders.builder_1_indoor_climate_one_step_Euler import load_one_step_euler_from_yamls
+from src.builders.builder_indoor_climate_one_step_Euler import load_one_step_euler_from_yamls
 
 
 def _bounds_for(names: list[str], table: dict[str, tuple[float, float]], default=(0.0, 1.0)) -> np.ndarray:

@@ -1,4 +1,4 @@
-# src/builders/builder_1_indoor_climate_one_step_Euler.py
+# src/builders/builder_indoor_climate_one_step_Euler.py
 """
 One-step Euler-forward discretization for the indoor climate ODE model.
 
@@ -11,7 +11,7 @@ Project structure assumed:
   <project_root>/
     configs/
       variable_and_parameter_keeper.yaml
-    src/builders/builder_1_indoor_climate_one_step_Euler.py
+    src/builders/builder_indoor_climate_one_step_Euler.py
 """
 from __future__ import annotations
 

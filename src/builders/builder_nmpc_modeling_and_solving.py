@@ -1,4 +1,4 @@
-# src/builders/builder_2_nmpc_modeling_and_solving.py
+# src/builders/builder_nmpc_modeling_and_solving.py
 from __future__ import annotations
 
 from dataclasses import dataclass

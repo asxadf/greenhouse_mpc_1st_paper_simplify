@@ -11,8 +11,8 @@ from typing import Any, Dict, List, Optional, Tuple
 import numpy as np
 import yaml
 
-from src.builders.builder_1_indoor_climate_one_step_Euler import load_one_step_euler_from_yamls
-from src.builders.builder_2_nmpc_modeling_and_solving import modeling_solving_nmpc_problem
+from src.builders.builder_indoor_climate_one_step_Euler import load_one_step_euler_from_yamls
+from src.builders.builder_nmpc_modeling_and_solving import modeling_solving_nmpc_problem
 
 _THIS = Path(__file__).resolve()
 REPO = _THIS.parents[1]

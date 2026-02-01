@@ -1,6 +1,6 @@
-# configs/setting_lmpc.yaml
+# configs/setting_qmpc.yaml
 controller:
-  type: "lmpc"
+  type: "qmpc"
 
 model:
   kind: "affine_incremental"
