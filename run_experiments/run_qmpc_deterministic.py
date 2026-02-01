@@ -232,62 +232,80 @@ def _print_named(title: str, names: List[str], values: np.ndarray) -> None:
 def main() -> None:
     settings = _read_yaml(SETTING_QMPC_YAML)
     keeper = _read_yaml(KEEPER_YAML)
+    mpc = keeper["mpc_global_parameters"]
 
     model = load_one_step_euler_from_yamls()
     defs = model.defs
 
     info = _load_or_init_current_step_information(defs, keeper)
-    step_index = int(info["step_index"])
-    x_ini = np.asarray(info["x"], dtype=float)
 
     D_pred, pred_ts = _load_disturbance_csv(OUTDOOR_PREDICTION_CSV, defs)
     D_real, real_ts = _load_disturbance_csv(OUTDOOR_REALIZATION_CSV, defs)
+    timestamps = real_ts if real_ts else pred_ts
 
-    K = int(keeper["mpc_global_parameters"]["K"])
-    d_pred_h, K_eff = _slice_horizon(D_pred, step_index, K)
-    d_real_i = D_real[min(step_index, D_real.shape[0] - 1)]
+    K = int(mpc["K"])
+    steps_per_day = int(mpc["steps_per_day"])
+    simulation_days = int(mpc.get("simulation_days", 0) or 0)
+    total_steps = simulation_days * steps_per_day if simulation_days > 0 else D_real.shape[0]
+    total_steps = min(total_steps, D_real.shape[0])
+    remaining = max(0, total_steps - int(info["step_index"]))
 
     affine = _load_affine_matrices(settings["model"])
+    dli_idx = defs.state_idx.get("L_DLI")
 
-    result = modeling_solving_qmpc_deterministic_problem(
-        model=model,
-        x_ini=x_ini,
-        d_pred_h=d_pred_h,
-        step_index=step_index,
-        K=K_eff,
-        mpc_global_parameters=keeper["mpc_global_parameters"],
-        affine=affine,
-        solver_options=settings.get("solver", {}).get("options", {}),
-    )
+    for _ in range(remaining):
+        step_index = int(info["step_index"])
+        x_ini = np.asarray(info["x"], dtype=float)
 
-    x_next = np.asarray(model.step(x_ini, result.u0, d_real_i), dtype=float)
+        if dli_idx is not None and step_index % steps_per_day == 0:
+            x_ini[dli_idx] = 0.0
 
-    info = {
-        "step_index": step_index + 1,
-        "x": x_next.tolist(),
-    }
-    _save_current_step_information(info)
+        d_pred_h, K_eff = _slice_horizon(D_pred, step_index, K)
+        d_real_i = D_real[step_index]
 
-    t0 = _parse_iso(pred_ts[step_index]) if step_index < len(pred_ts) else None
-    t1 = _parse_iso(real_ts[step_index]) if step_index < len(real_ts) else None
-    tK = _horizon_end_time(pred_ts, step_index, K, keeper["mpc_global_parameters"]["Delta_t"], t0)
+        result = modeling_solving_qmpc_deterministic_problem(
+            model=model,
+            x_ini=x_ini,
+            d_pred_h=d_pred_h,
+            step_index=step_index,
+            K=K_eff,
+            mpc_global_parameters=mpc,
+            affine=affine,
+            solver_options=settings.get("solver", {}).get("options", {}),
+        )
 
-    print("\n=== QMPC Deterministic Step ===")
-    print(f"step_index : {step_index}")
-    if t0:
-        print(f"t0         : {t0.isoformat()}")
-    if t1:
-        print(f"t_real     : {t1.isoformat()}")
-    if tK:
-        print(f"t_horizon  : {tK.isoformat()}")
-    print(f"solve_ok   : {result.success}")
-    print(f"status     : {result.status} ({result.message})")
-    if result.solve_time_s is not None:
-        print(f"solve_time : {result.solve_time_s:.3f}s")
-    print(f"objective  : {result.objective}")
+        x_next = np.asarray(model.step(x_ini, result.u0, d_real_i), dtype=float)
 
-    _print_named("u0 (control)", defs.control_names, result.u0)
-    _print_named("x_next (digital twin)", defs.state_names, x_next)
+        info = {
+            "step_index": step_index + 1,
+            "x": x_next.tolist(),
+        }
+        _save_current_step_information(info)
+
+        t0 = _parse_iso(timestamps[step_index]) if step_index < len(timestamps) else None
+        t1 = (
+            _parse_iso(timestamps[step_index + 1])
+            if (step_index + 1) < len(timestamps)
+            else (t0 + timedelta(seconds=float(model.dt_s)) if t0 else None)
+        )
+        tK = _horizon_end_time(timestamps, step_index, K, model.dt_s, t0)
+
+        print("\n=== QMPC Deterministic Step ===")
+        print(f"step_index : {step_index}")
+        if t0:
+            print(f"t0         : {t0.isoformat()}")
+        if t1:
+            print(f"t_real     : {t1.isoformat()}")
+        if tK:
+            print(f"t_horizon  : {tK.isoformat()}")
+        print(f"solve_ok   : {result.success}")
+        print(f"status     : {result.status} ({result.message})")
+        if result.solve_time_s is not None:
+            print(f"solve_time : {result.solve_time_s:.3f}s")
+        print(f"objective  : {result.objective}")
+
+        _print_named("u0 (control)", defs.control_names, result.u0)
+        _print_named("x_next (digital twin)", defs.state_names, x_next)
 
 
 if __name__ == "__main__":
