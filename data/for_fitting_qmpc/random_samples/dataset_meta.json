@@ -1,10 +1,10 @@
 {
-  "created_at": "20260131_202310",
+  "created_at": "20260201_000544",
   "num_sample": 60000,
-  "attempts": 114753,
-  "invalid": 54753,
-  "invalid_pct": 47.71378526051607,
-  "accept_rate_pct": 52.28621473948394,
+  "attempts": 103362,
+  "invalid": 43362,
+  "invalid_pct": 41.95158762407848,
+  "accept_rate_pct": 58.04841237592152,
   "seed": 0,
   "dt_s": 300.0,
   "state_limits": {
@@ -17,8 +17,8 @@
       40.0
     ],
     "C_in": [
-      0.0,
-      10.0
+      0.4,
+      5.0
     ],
     "L_DLI": [
       0.0,
@@ -26,7 +26,7 @@
     ]
   },
   "rejection_reasons": {
-    "x1_C_in_below_min": 54753
+    "x1_C_in_below_guard": 43362
   },
   "names": {
     "state": [
@@ -54,6 +54,63 @@
       "R_out"
     ]
   },
+  "sampling": {
+    "x0_bounds": {
+      "T_in": [
+        16.0,
+        25.0
+      ],
+      "C_in": [
+        0.7,
+        2.0
+      ],
+      "L_DLI": [
+        0.0,
+        44.0
+      ]
+    },
+    "u_bounds": {},
+    "d_bounds": {
+      "T_out": [
+        -5.0,
+        15.0
+      ],
+      "C_out": [
+        0.6,
+        1.0
+      ],
+      "R_out": [
+        0.0,
+        800.0
+      ]
+    },
+    "RH_in_bounds": [
+      0.2,
+      1.0
+    ],
+    "RH_out_bounds": [
+      0.2,
+      1.0
+    ],
+    "H_in_rule": "H_in = RH_in * H_sat(T_in)",
+    "H_out_rule": "H_out = RH_out * H_sat(T_out)",
+    "H_sat_units": "g/m^3",
+    "H_sat_method": "Magnus e_s(T) + ideal gas conversion",
+    "CO2": {
+      "C_in_bounds": [
+        0.7,
+        2.0
+      ],
+      "C_out_bounds": [
+        0.6,
+        1.0
+      ],
+      "C_in_min_guard": 0.4,
+      "C_in_max_guard": 5.0,
+      "control_bias": "if C_in low => higher U_dos, lower U_nat/U_fan (if present)"
+    }
+  },
+  "model_form": "x_{k+1} = f(x_k, u_k, d_k) (later fit as M,N,O,m)",
   "model_params_snapshot": {
     "A_floor": 421.0,
     "A_roof": 472.0,

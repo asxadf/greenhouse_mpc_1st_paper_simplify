@@ -1,5 +1,5 @@
 {
-  "created_at": "20260131_202319",
+  "created_at": "20260201_000549",
   "dataset_path": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/random_samples/dataset.npz",
   "random_samples_dir": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/random_samples",
   "results_dir": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results",
@@ -9,7 +9,7 @@
   "n_x": 4,
   "n_u": 10,
   "n_d": 4,
-  "spectral_radius_M": 1.0517018224613537,
+  "spectral_radius_M": 1.0000006697855166,
   "exports": {
     "M": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/M_matrix.csv",
     "N": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/N_matrix.csv",
@@ -17,12 +17,12 @@
     "m": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/readable_exports/m_bias.csv"
   },
   "scores": {
-    "test_delta_mse": 0.23140805603783146,
-    "test_delta_mae": 0.2983100397833637,
-    "train_delta_mse": 0.2307407232153322,
-    "train_delta_mae": 0.2971606941169045,
-    "test_delta_r2_avg": 0.8533797958487601,
-    "train_delta_r2_avg": 0.8551574720940264
+    "test_x1_mse": 0.01429943736772133,
+    "test_x1_mae": 0.06784220218094757,
+    "train_x1_mse": 0.013680119024900288,
+    "train_x1_mae": 0.06701040032331551,
+    "test_x1_r2_avg": 0.9037999965466982,
+    "train_x1_r2_avg": 0.9049143319464983
   },
   "saved": {
     "matrices": "/Users/xianbangchen/Library/Mobile Documents/com~apple~CloudDocs/Beef/Project_Py/greenhouse_mpc_1st_paper_simplify/data/for_fitting_qmpc/fitting_results/fitted_matrices.npz",

@@ -317,55 +317,55 @@ class IndoorClimateEulerOneStep:
 # =============================================================================
 # [BLOCK] PYCHARM SMOKE RUN (no CLI)
 # =============================================================================
-# if __name__ == "__main__":
-#     m = load_one_step_euler_from_yamls()
-#
-#     x = np.array(
-#         [
-#             19.00,  # T_in
-#              7.41,  # H_in
-#              0.92,  # C_in
-#              0.00,  # L_DLI
-#         ],
-#         dtype=float,
-#     )
-#
-#     u = np.array(
-#         [
-#             1.0,  # U_heat
-#             0.0,  # U_fan
-#             0.0,  # U_nat
-#             0.0,  # U_pad
-#             0.0,  # U_dos
-#             1.0,  # U_LED
-#             0.0,  # U_hum
-#             0.0,  # U_dehum
-#             0.0,  # U_scre_shad
-#             0.0,  # U_scre_warm
-#         ],
-#         dtype=float,
-#     )
-#
-#     d = np.array(
-#         [
-#             3.00,  # T_out
-#             4.56,  # H_out
-#             0.78,  # C_out
-#             0.00,  # R_out
-#         ],
-#         dtype=float,
-#     )
-#
-#     x_next = m.step(x, u, d)
-#
-#     def _print_named(title: str, names: list[str], values: np.ndarray) -> None:
-#         print(f"\n{title}")
-#         for name, val in zip(names, values.tolist()):
-#             print(f"  {name:>12s} : {val: .6g}")
-#
-#     print(f"dt_s = {m.dt_s:g}")
-#
-#     _print_named("x_k (state)", m.defs.state_names, x)
-#     _print_named("u_k (control)", m.defs.control_names, u)
-#     _print_named("d_k (disturbance)", m.defs.disturbance_names, d)
-#     _print_named("x_k+1 (next state)", m.defs.state_names, x_next)
+if __name__ == "__main__":
+    m = load_one_step_euler_from_yamls()
+
+    x = np.array(
+        [
+            19.00,  # T_in
+             7.41,  # H_in
+             0.92,  # C_in
+             0.00,  # L_DLI
+        ],
+        dtype=float,
+    )
+
+    u = np.array(
+        [
+            0.0,  # U_heat
+            0.0,  # U_fan
+            0.0,  # U_nat
+            0.0,  # U_pad
+            0.0,  # U_dos
+            0.0,  # U_LED
+            0.0,  # U_hum
+            0.0,  # U_dehum
+            0.0,  # U_scre_shad
+            1.0,  # U_scre_warm
+        ],
+        dtype=float,
+    )
+
+    d = np.array(
+        [
+            3.00,  # T_out
+            4.56,  # H_out
+            0.78,  # C_out
+            0.00,  # R_out
+        ],
+        dtype=float,
+    )
+
+    x_next = m.step(x, u, d)
+
+    def _print_named(title: str, names: list[str], values: np.ndarray) -> None:
+        print(f"\n{title}")
+        for name, val in zip(names, values.tolist()):
+            print(f"  {name:>12s} : {val: .6g}")
+
+    print(f"dt_s = {m.dt_s:g}")
+
+    _print_named("x_k (state)", m.defs.state_names, x)
+    _print_named("u_k (control)", m.defs.control_names, u)
+    _print_named("d_k (disturbance)", m.defs.disturbance_names, d)
+    _print_named("x_k+1 (next state)", m.defs.state_names, x_next)

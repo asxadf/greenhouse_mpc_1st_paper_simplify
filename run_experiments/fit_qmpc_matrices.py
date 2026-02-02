@@ -144,28 +144,28 @@ def _export_csv_exports(
     _write_labeled_matrix_csv(
         path=paths["M"],
         mat=M,
-        row_label="delta_x_state",
+        row_label="x_state",
         row_names=state_names,
         col_names=state_names,
     )
     _write_labeled_matrix_csv(
         path=paths["N"],
         mat=N,
-        row_label="delta_x_state",
+        row_label="x_state",
         row_names=state_names,
         col_names=control_names,
     )
     _write_labeled_matrix_csv(
         path=paths["O"],
         mat=O,
-        row_label="delta_x_state",
+        row_label="x_state",
         row_names=state_names,
         col_names=disturbance_names,
     )
     _write_labeled_vector_csv(
         path=paths["m"],
         vec=m,
-        row_label="delta_x_state",
+        row_label="x_state",
         row_names=state_names,
         col_name="bias",
     )
@@ -239,7 +239,7 @@ if __name__ == "__main__":
     _print_stats("D stats", disturbance_names, d)
     _print_stats("X1 stats", state_names, x1)
 
-    Y = x1 - x0
+    Y = x1
     Phi = np.hstack([x0, u, d])
 
     idx = np.arange(len(Phi))
@@ -261,12 +261,12 @@ if __name__ == "__main__":
 
     Yhat_te = Phi_te @ B.T + b
     Yhat_tr = Phi_tr @ B.T + b
-    x1hat_te = x0_te + Yhat_te
-    x1hat_tr = x0_tr + Yhat_tr
+    x1hat_te = Yhat_te
+    x1hat_tr = Yhat_tr
 
-    _metrics_table("Test metrics (delta-x prediction):", state_names, Y_te, Yhat_te)
+    _metrics_table("Test metrics (x1 prediction):", state_names, Y_te, Yhat_te)
     print()
-    _metrics_table("Test metrics (implied X1 prediction):", state_names, x1_te, x1hat_te)
+    _metrics_table("Test metrics (x1 prediction, direct):", state_names, x1_te, x1hat_te)
     print()
 
     rho = _spectral_radius(M)
@@ -275,9 +275,9 @@ if __name__ == "__main__":
         print("Warning: M spectral radius > 1.0 (unstable dynamics).")
     print()
 
-    _metrics_table("Train metrics (delta-x prediction):", state_names, Y_tr, Yhat_tr)
+    _metrics_table("Train metrics (x1 prediction):", state_names, Y_tr, Yhat_tr)
     print()
-    _metrics_table("Train metrics (implied X1 prediction):", state_names, x1_tr, x1hat_tr)
+    _metrics_table("Train metrics (x1 prediction, direct):", state_names, x1_tr, x1hat_tr)
 
     out_dir = _clear_dir_safely(root, results_dir_rel)
 
@@ -328,12 +328,12 @@ if __name__ == "__main__":
         "spectral_radius_M": float(rho),
         "exports": export_paths,
         "scores": {
-            "test_delta_mse": float(mean_squared_error(Y_te, Yhat_te)),
-            "test_delta_mae": float(mean_absolute_error(Y_te, Yhat_te)),
-            "train_delta_mse": float(mean_squared_error(Y_tr, Yhat_tr)),
-            "train_delta_mae": float(mean_absolute_error(Y_tr, Yhat_tr)),
-            "test_delta_r2_avg": float(r2_score(Y_te, Yhat_te, multioutput="uniform_average")),
-            "train_delta_r2_avg": float(r2_score(Y_tr, Yhat_tr, multioutput="uniform_average")),
+            "test_x1_mse": float(mean_squared_error(Y_te, Yhat_te)),
+            "test_x1_mae": float(mean_absolute_error(Y_te, Yhat_te)),
+            "train_x1_mse": float(mean_squared_error(Y_tr, Yhat_tr)),
+            "train_x1_mae": float(mean_absolute_error(Y_tr, Yhat_tr)),
+            "test_x1_r2_avg": float(r2_score(Y_te, Yhat_te, multioutput="uniform_average")),
+            "train_x1_r2_avg": float(r2_score(Y_tr, Yhat_tr, multioutput="uniform_average")),
         },
         "saved": {
             "matrices": str(mats_path),

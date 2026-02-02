@@ -125,7 +125,7 @@ mpc_global_parameters:
   # ----------------------------
   # MPC horizon / timing settings
   # ----------------------------
-  K:              1         # Number of total steps. | -
+  K:              6         # Number of total steps. | -
   Delta_t:        300        # Time interval. | s
   gamma:          0.99       # Discount factor. | -
 
@@ -157,12 +157,12 @@ mpc_global_parameters:
   # ----------------------------
   # Tracking weights / penalties
   # ----------------------------
-  lambda_T:       38        # Tracking coefficient for T_in. | $/°C^2
-  lambda_Z:       10       # Tracking coefficient for Z_in. | $/kPa^2
-  lambda_B:                  # Tracking coefficient for B_in (day/night). | $/ppm^2
-    day:        100
+  lambda_T:       1       # Tracking coefficient for T_in. | $/°C^2
+  lambda_Z:       1       # Tracking coefficient for Z_in. | $/kPa^2
+  lambda_B:                # Tracking coefficient for B_in (day/night). | $/ppm^2
+    day:        1
     night:      0.0
-  lambda_L:       50        # Tracking coefficient for L_DLI shortage. | $/(mol^2/m^4)
+  lambda_L:       100        # Tracking coefficient for L_DLI shortage. | $/(mol^2/m^4)
 
   lambda_T_plus:  100       # Penalty for T_in upper slack S^{T+}. | $/°C
   lambda_T_minus: 100       # Penalty for T_in lower slack S^{T-}. | $/°C

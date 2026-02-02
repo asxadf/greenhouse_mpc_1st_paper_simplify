@@ -111,7 +111,7 @@ def modeling_solving_qmpc_deterministic_problem(
     if d_pred_h.shape != (K, len(defs.disturbance_names)):
         raise ValueError("d_pred_h must be shaped (K, n_d)")
 
-    A = np.eye(num_x) + np.asarray(affine.M, dtype=float)
+    A = np.asarray(affine.M, dtype=float)
     N = np.asarray(affine.N, dtype=float)
     O = np.asarray(affine.O, dtype=float)
     m = np.asarray(affine.m, dtype=float).reshape(num_x)
