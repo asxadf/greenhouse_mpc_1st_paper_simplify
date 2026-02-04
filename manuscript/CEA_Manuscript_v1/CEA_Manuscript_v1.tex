@@ -1,0 +1,617 @@
+%% 
+%% Copyright 2019-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'CAS Bundle'.
+%% --------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'CAS Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for cas-dc documentclass for 
+%% double column output.
+
+%\documentclass[a4paper,fleqn,longmktitle]{cas-dc}
+\documentclass[a4paper,fleqn]{cas-dc}
+
+%\usepackage[authoryear,longnamesfirst]{natbib}
+%\usepackage[authoryear]{natbib}
+\usepackage[ruled, algonl, vlined]{algorithm2e}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\usepackage{color}
+\usepackage[numbers]{natbib}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm} 
+\usepackage[nocfg]{nomencl}
+\usepackage{ifthen}
+\usepackage{paralist}
+\usepackage{tabularx}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+%% Nomenclature
+\usepackage{framed} % Framing content
+\usepackage{multicol} % Multiple columns environment
+\usepackage{nomencl} % Nomenclature package
+\makenomenclature
+\setlength{\nomitemsep}{-\parskip} % Baseline skip between items
+\renewcommand*\nompreamble{\begin{multicols}{2}}
+\renewcommand*\nompostamble{\end{multicols}}
+\usepackage{etoolbox}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+%%%Author definitions
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+\tsc{EP}
+\tsc{PMS}
+\tsc{BEC}
+\tsc{DE}
+%%%
+
+% ---------- Clean the CAS template front-matter artifacts ----------
+\ExplSyntaxOn
+
+% Remove running head title (kills "Short Title of the Article")
+\cs_gset:Npn \__short_title: {}
+
+% Remove footer author string and "Preprint submitted to Elsevier"
+\cs_gset:Npn \__short_authors: {}
+\cs_gset:Npn \__first_footerline: {}  % keeps "Page X of Y" but removes the preprint line
+
+% Remove ORCID(s): line
+\RenewDocumentCommand \printorcid {} {}
+
+% Remove "A B S T R A C T" label
+\tex_gdef:D \abstractname {}
+
+% Remove the 2 full-width rules around the abstract box (top+bottom lines)
+\RenewDocumentCommand \dashrule { O{.4pt} m m } { \skip_vertical:n {#2} \skip_vertical:n {#3} }
+
+% Remove the small middle rule under ABSTRACT by redefining the Abstract environment
+\RenewDocumentEnvironment { Abstract } { o }
+  { \group_begin: \footnotesize \ignorespaces }
+  { \par \group_end: }
+
+\ExplSyntaxOff
+% -------------------------------------------------------------------
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+
+%%\tnotemark[1,2]
+
+%%\tnotetext[1]{Note 1}
+
+%%\tnotetext[2]{Note 2}
+
+
+% Here goes the abstract
+
+
+% Use if graphical abstract is present
+%\begin{graphicalabstract}
+%\includegraphics{}
+%\end{graphicalabstract}
+
+% Research highlights
+% Research highlights
+
+% Keywords
+% Each keyword is seperated by \sep
+\maketitle
+\scriptsize
+
+\begin{table}[t]
+\scriptsize
+\centering
+$\vspace{-10mm}$
+\caption{Variables of the climate dynamic model.}
+\begin{tabularx}{\linewidth}{@{}p{0.09\linewidth} p{0.63\linewidth} Y@{}}
+\toprule
+                       & Definition                     & Unit \\
+\midrule
+$C^{\mathrm{in}}$      & Indoor CO$_2$ absolute concentration.    & $\mathrm{g/m^{3}}$ \\
+$C^{\mathrm{out}}$     & Outdoor CO$_2$ absolute concentration.   & $\mathrm{g/m^{3}}$ \\
+
+$D^{\mathrm{dos}}$   & CO$_2$ dosing rate.                      & $\mathrm{g/s}$\\
+$D^{\mathrm{vent}}$  & CO$_2$ changing rate due to ventilation. & $\mathrm{g/s}$\\
+$D^{\mathrm{ass}}$   & CO$_2$ assimilation rate.                & $\mathrm{g/s}$\\
+
+$F^{\mathrm{cool}}$    & Humidifying rate due to cooling pads and humidifiers.      & $\mathrm{g/s}$ \\
+$F^{\mathrm{deh}}$     & Dehumidifying rate.                             & $\mathrm{g/s}$ \\
+$F^{\mathrm{vent}}$    & Humidity changing rate due to venting.          & $\mathrm{g/s}$ \\
+$F^{\mathrm{tran}}$    & Humidity changing rate due to transpiration.    & $\mathrm{g/s}$ \\
+$F^{\mathrm{vc}}$      & Humidity changing rate due to vapor condensing. & $\mathrm{g/s}$ \\
+
+$g^{\mathrm{vc}}$    & Vapor condensing coefficient.     & $\mathrm{m/s}$\\
+$g^{\mathrm{tran}}$  & Transpiration conductance.               & $\mathrm{m/s}$\\
+
+$H^{\mathrm{in}}$      & Indoor absolute humidity.                & $\mathrm{g/m^{3}}$\\
+$H^{\mathrm{in,sat}}$  & Indoor saturation absolute humidity.     & $\mathrm{g/m^{3}}$\\
+$H^{\mathrm{out}}$     & Outdoor absolute humidity.               & $\mathrm{g/m^{3}}$\\
+$H^{\mathrm{cano}}$    & Absolute humidity at canopy.             & $\mathrm{g/m^{3}}$\\
+
+$L$                    & Daily light integral (resets to 0 at 00:00). & $\mathrm{mol/m^{2}}$\\
+
+$Q^{\mathrm{heat}}$  & Heat-gain power due to heaters.                         & $\mathrm{W}$ \\
+$Q^{\mathrm{vent}}$  & Heat-exchange power due to ventilation.                 & $\mathrm{W}$ \\
+$Q^{\mathrm{cool}}$  & Heat-loss power due to cooling systems.                 & $\mathrm{W}$ \\
+$Q^{\mathrm{solar}}$ & Heat-gain power due to solar radiation.                 & $\mathrm{W}$ \\
+$Q^{\mathrm{i-o}}$   & Heat-exchange power due to $T^{\mathrm{i-o}}$.          & $\mathrm{W}$ \\
+$Q^{\mathrm{LED}}$   & Heat-gain power due to LEDs.                            & $\mathrm{W}$ \\
+$Q^{\mathrm{tran}}$  & Heat-loss power due to transpiration.                   & $\mathrm{W}$ \\
+
+$r^{\mathrm{s}}$         & Canopy stomatal resistance.       & $\mathrm{s/m}$ \\
+$R^{\mathrm{cano-abs}}$  & Canopy-absorbed radiation.        & $\mathrm{W/m^{2}}$ \\
+$R^{\mathrm{cano-glo}}$  & Global radiation at canopy.       & $\mathrm{W/m^{2}}$ \\
+$R^{\mathrm{cano-solar}}$& Solar radiation at canopy.        & $\mathrm{W/m^{2}}$ \\
+$R^{\mathrm{cano-LED}}$  & LED radiation at canopy.          & $\mathrm{W/m^{2}}$ \\
+$R^{\mathrm{out}}$       & Outdoor radiation.                & $\mathrm{W/m^{2}}$ \\
+
+$t$                    & Time.                                  & $\mathrm{s}$ \\
+$T^{\mathrm{out}}$     & Outdoor temperature.                   & $\si{\celsius}$ \\
+$T^{\mathrm{in}}$      & Indoor temperature.                    & $\si{\celsius}$ \\
+$T^{\mathrm{cover}}$   & Covering temperature.                  & $\si{\celsius}$ \\
+$T^{\mathrm{i-o}}$     & Indoor–outdoor temperature difference. & $\si{\celsius}$ \\ 
+
+$U^{\mathrm{heat}}$       & Actuation of heater power.                         & - \\
+$U^{\mathrm{fan}}$        & Actuation of ventilation fan speed.                & - \\
+$U^{\mathrm{nat}}$        & Actuation of natural ventilation opening ratio.    & - \\
+$U^{\mathrm{pad}}$        & Actuation of cooling pad wetness level.            & - \\
+$U^{\mathrm{dos}}$        & Actuation of CO$_2$ dosing rate.                   & - \\
+$U^{\mathrm{LED}}$        & Actuation of LED electric power.                   & - \\
+$U^{\mathrm{shad}}$  & Actuation of shading screen closure.               & - \\
+$U^{\mathrm{warm}}$  & Actuation of warm-keeping screen closure.          & - \\
+$U^{\mathrm{hum}}$        & Actuation of humidification rate.                  & - \\
+$U^{\mathrm{deh}}$        & Actuation of dehumidification rate.                & - \\
+
+
+
+$V^{\mathrm{vent}}$       & Total ventilation.        & $\mathrm{m^{3}/s}$ \\
+
+$X^{\mathrm{cano}}$ & PPFD at canopy.                 & $\mathrm{\mu mol/(m^{2}\cdot s)}$  \\
+\bottomrule       
+\end{tabularx}
+\end{table}
+
+\begin{table}[t]
+\scriptsize
+\centering
+$\vspace{-10mm}$
+\caption{Parameters of the state-space model.}
+\begin{tabularx}{\linewidth}{@{}p{0.09\linewidth} p{0.52\linewidth} p{0.08\linewidth} Y@{}}
+\toprule
+                        & Definition     & Value  & Unit \\
+\midrule
+$A^{\mathrm{floor}}$    & Floor area.      & 421    & $\mathrm{m^{2}}$ \\
+$A^{\mathrm{roof}}$     & Roof area.       & 472    & $\mathrm{m^{2}}$ \\
+$A^{\mathrm{wall}}$     & Side-wall area.  & 628    & $\mathrm{m^{2}}$ \\
+
+$c^{\mathrm{vh}}$       & Air volumetric heat capacity.    & 1230 & $\mathrm{J/(m^{3} \cdot \si{\celsius})}$ \\
+$\hat{C}^{\mathrm{in}}$ & CO$_2$ half-saturation constant. & 0.23 & $\mathrm{g/m^{3}}$ \\
+
+$\bar{D}^{\mathrm{dos}}$   & Maximum CO$_2$ dosing rate.       & 1.04          & $\mathrm{g/s}$\\
+$\bar{D}^{\mathrm{ass}}$   & Maximum CO$_2$ assimilation flux. & 2.2e-3        & $\mathrm{g/(m^{2}\cdot s)}$\\
+
+$\bar{F}^{\mathrm{hum}}$    & Maximum injection rate of mist water.     & 18            & $\mathrm{g/s}$ \\
+$\bar{F}^{\mathrm{deh}}$  & Maximum moisture removal rate.            & 12            & $\mathrm{g/s}$ \\
+
+$\tilde{H}$             & Empirical coefficient.     & 5.5638     & $\mathrm{g/m^{3}}$ \\
+
+$I$  & Leaf area index. & 2.5        & $\mathrm{m^{2}}/\mathrm{m^{2}}$ \\
+
+$\rho$ & PPFD response coefficient. & 1.5e-3  & $\mathrm{(m^{2}\cdot s)/\mu mol}$ \\
+$\bar{P}^{\mathrm{LED}}$ & Maximum electrical power of LEDs. & 4.375e4   & $\mathrm{W}$ \\
+
+$q^{\mathrm{evap}}$        & Latent heat of evaporation.       & 2430     & $\mathrm{J/g}$\\
+$\bar{Q}^{\mathrm{heat}}$  & Maximum power from heaters.       & 2.36e5   & $\mathrm{W}$ \\
+$\bar{Q}^{\mathrm{pad}}$   & Maximum power from cooling pads.  & 2.95e5   & $\mathrm{W}$ \\
+
+$r^{\mathrm{b}}$              & Boundary layer resistance.        & 200     & $\mathrm{s/m}$ \\
+$\bar{r}^{\mathrm{s}}$        & Maximum additional resistance.    & 570     & $\mathrm{s/m}$ \\
+$\underline{r}^{\mathrm{s}}$  & Minimal stomatal resistance.      & 82      & $\mathrm{s/m}$ \\
+
+$\tau$            & Crop-specific coefficient.    & 0.4        & $\mathrm{m^{2}/W}$\\
+$T^{\mathrm{sr}}$ & Reference temperature.        & 24.5       & $\si{\celsius}$ \\
+
+
+$\upsilon^{\mathrm{roof}}$ & Heat-transfer coefficient of roofs.       & 6.6      & $\mathrm{W/(m^{2}\cdot \si{\celsius})}$ \\
+$\upsilon^{\mathrm{wall}}$ & Heat-transfer coefficient of side walls.  & 6.3      & $\mathrm{W/(m^{2}\cdot \si{\celsius})}$ \\
+$\nu^{\mathrm{surf}}$      & Condensation surface coefficient.         & 1.8e-3  & $\mathrm{m/(\si{\celsius}^{1/3}\cdot s)}$\\
+
+$V^{\mathrm{gh}}$          & Indoor volume.                             & 3.351e3         & $\mathrm{m^{3}}$ \\
+$\bar{V}^{\mathrm{fan}}$   & Maximum mechanical ventilation rate.       & 48            & $\mathrm{m^{3}/s}$ \\
+$\bar{V}^{\mathrm{nat}}$   & Maximum natural ventilation rate.          & 5             & $\mathrm{m^{3}/s}$ \\
+
+$\omega^{\mathrm{T}}$      & Temperature buffering coefficient.       & 30 & - \\
+$\omega^{\mathrm{H}}$      & Humidity buffering coefficient.          & 15 & - \\
+$\omega^{\mathrm{C}}$      & CO$_2$ buffering coefficient.            & 1  & - \\
+
+$\chi$                     & Latent-to-sensible ratio (sat air).         & 2.5 & -\\
+
+$\phi^{\mathrm{solar}}$    & Solar radiation-to-PPFD coefficient.              & 2.0                  & $\mathrm{\mu mol/(W\cdot s)}$ \\
+$\phi^{\mathrm{LED}}$      & LED radiation-to-PPFD coefficient.                & 5.17                 & $\mathrm{\mu mol/(W\cdot s)}$ \\
+
+$\lambda^{\mathrm{leak}}$  & Air leakage rate.                          & 1.0           & $\mathrm{h^{-1}}$ \\
+
+$\zeta$                    & Empirical coefficient.                    & 0.2522   & $\mathrm{g/(m^{3} \cdot \si{\celsius})}$ \\
+$\sigma$                   & Smoothing coefficient.                    & 1e-3    & $\si{\celsius}$\\
+
+$\delta^{\mathrm{tran}}$   & Temperature sensitivity coefficient.    & 0.0518     & $\mathrm{\si{\celsius}^{-1}}$ \\
+$\delta^{\mathrm{sat}}$    & Temperature sensitivity coefficient.    & 0.0572     & $\mathrm{\si{\celsius}^{-1}}$ \\
+$\delta^{\mathrm{vc}}$     & Temperature sensitivity coefficient.    & 0.0485     & $\mathrm{\si{\celsius}^{-1}}$ \\
+$\delta^{\mathrm{sr}}$     & Temperature sensitivity coefficient.    & 0.023      & $\mathrm{\si{\celsius}^{-2}}$ \\
+
+$\eta^{\mathrm{LED-r}}$    & Fraction of LED electrical power emitted as radiation (light). & 0.59 & -- \\
+$\eta^{\mathrm{LED-cano}}$ & Attenuation of LED radiation to canopy.     & 0.40 & - \\
+$\eta^{\mathrm{evap}}$     & Water evaporation fraction.                 & 0.70 & - \\
+$\eta^{\mathrm{cover}}$    & Cover shortwave transmissivity.             & 0.50 & - \\
+$\eta^{\mathrm{short}}$    & Shortwave absorption ratio.                 & 0.86 & - \\
+$\eta^{\mathrm{ext}}$      & Light extinction coefficient.               & 0.70 & - \\
+
+$\eta^{\mathrm{tran}}$      & Empirical coefficient.              & 0.7584 & - \\
+
+
+$\eta^{\mathrm{shad}}$     & Radiation attenuation of shading screen.    & 0.35 & - \\
+$\eta^{\mathrm{warm}}$     & Heat insulation of warm-keeping screen.     & 0.50 & - \\
+
+\bottomrule       
+\end{tabularx}
+\end{table}
+
+The indoor temperature dynamics are modeled by \eqref{Q}.
+\begin{subequations}\label{Q}
+\begin{align}
+&\frac{\mathrm{d}T^{\mathrm{in}}}{\mathrm{d}t} = \frac{Q^{\mathrm{heat}} - Q^{\mathrm{vent}} - Q^{\mathrm{cool}} + Q^{\mathrm{solar}} - Q^{\mathrm{i-o}} + Q^{\mathrm{LED}} - Q^{\mathrm{tran}}}{\omega^{\mathrm{T}} \cdot V^{\mathrm{gh}} \cdot c^{\mathrm{vh}}}                                                                             
+                                                                                       \label{Q:Tdyn}\\
+& Q^{\mathrm{heat}} = \bar{Q}^{\mathrm{heat}} \cdot U^{\mathrm{heat}}                  \label{Q:heat}\\
+& Q^{\mathrm{vent}} = c^{\mathrm{vh}} \cdot T^{\mathrm{i-o}} \cdot V^{\mathrm{vent}}   \label{Q:Qvent}\\
+& Q^{\mathrm{cool}} = \bar{Q}^{\mathrm{pad}} \cdot U^{\mathrm{pad}} + q^{\mathrm{evap}} \cdot \eta^{\mathrm{evap}} \cdot \bar{F}^{\mathrm{hum}} \cdot U^{\mathrm{hum}}
+                                                                                       \label{Q:cool}\\
+& Q^{\mathrm{solar}} = A^{\mathrm{floor}} \cdot R^{\mathrm{cano-solar}}                \label{Q:Qsol}\\
+& Q^{\mathrm{i-o}} = \left[
+\upsilon^{\mathrm{roof}} \cdot A^{\mathrm{roof}} \cdot
+\left(1-\eta^{\mathrm{warm}} \cdot U^{\mathrm{warm}}\right)
++ \upsilon^{\mathrm{wall}} \cdot  A^{\mathrm{wall}}
+\right] \cdot T^{\mathrm{i-o}}                                                             \label{Q:QDelta}\\
+& Q^{\mathrm{LED}}  = \bar{P}^{\mathrm{LED}} \cdot U^{\mathrm{LED}}                        \label{Q:QLED}\\
+& Q^{\mathrm{tran}} = q^{\mathrm{evap}} \cdot g^{\mathrm{tran}} \cdot \left(H^{\mathrm{cano}} - H^{\mathrm{in}}\right) \cdot A^{\mathrm{floor}}                                                                    
+                                                                                           \label{Q:Qtrans}
+\end{align}
+\end{subequations}
+
+The indoor humidity dynamics are modeled by \eqref{H}.
+\begin{subequations}\label{H}
+\begin{align}
+& \frac{\mathrm{d}H^{\mathrm{in}}}{\mathrm{d}t}
+=\frac{F^{\mathrm{cool}} - F^{\mathrm{deh}} - F^{\mathrm{vent}} + F^{\mathrm{tran}}-F^{\mathrm{vc}}}{\omega^{\mathrm{H}} \cdot V^{\mathrm{gh}}}                                                                          
+                                                                                    \label{H:Hdyn}\\
+& F^{\mathrm{cool}}  = Q^{\mathrm{cool}} / q^{\mathrm{evap}}                        \label{H:Hcool}\\
+& F^{\mathrm{deh}} = \bar{F}^{\mathrm{deh}}\cdot U^{\mathrm{deh}}             \label{H:Hdeh}\\
+& F^{\mathrm{vent}}  = (H^{\mathrm{in}} - H^{\mathrm{out}}) \cdot V^{\mathrm{vent}} \label{H:Hvent}\\
+& F^{\mathrm{tran}}  = Q^{\mathrm{tran}} / q^{\mathrm{evap}}                        \label{H:Htrans}\\
+& F^{\mathrm{vc}}    =  g^{\mathrm{vc}}\cdot \left[\zeta \cdot \exp \left(\delta^{\mathrm{vc}} \cdot T^{\mathrm{in}} \right)\cdot T^{\mathrm{i-o}} - (H^{\mathrm{in,sat}} - H^{\mathrm{in}}) \right] \cdot A^{\mathrm{floor}}
+                                                                                   \label{H:Hvc}
+\end{align}
+\end{subequations}
+
+The indoor CO$_{2}$ concentration dynamics are modeled by \eqref{C}.
+\begin{subequations}\label{C}
+\begin{align}
+& \frac{\mathrm{d}C^{\mathrm{in}}}{\mathrm{d}t} = \frac{D^{\mathrm{dos}} - D^{\mathrm{vent}} - D^{\mathrm{ass}}}{\omega^{\mathrm{C}} \cdot V^{\mathrm{gh}}} 
+                                                                                              \label{C:Cdyn}\\
+& D^{\mathrm{dos}}  = \bar{D}^{\mathrm{dos}} \cdot U^{\mathrm{dos}}                           \label{C:Cdos}\\
+& D^{\mathrm{vent}} = (C^{\mathrm{in}} - C^{\mathrm{out}}) \cdot V^{\mathrm{vent}}            \label{C:Cvent}\\
+& D^{\mathrm{ass}}  = \bar{D}^{\mathrm{ass}} \cdot \frac{C^{\mathrm{in}}}{C^{\mathrm{in}} + \hat{C}^{\mathrm{in}}}\cdot \left[1 - \exp\left(- \rho \cdot X^{\mathrm{cano}}\right)\right] \cdot A^{\mathrm{floor}}     \label{C:Cass}
+\end{align}
+\end{subequations}
+
+The daily light integral is modeled by \eqref{DLI}:
+\begin{equation}\label{DLI}
+\frac{\mathrm{d}L}{\mathrm{d}t} =
+\frac{X^{\mathrm{cano}}}{10^{6}}
+\end{equation}
+
+Note that the transpiration model in \eqref{Q:Qtrans} and \eqref{H:Htrans} is adopted from \cite{PJM_Minimal_heating_and_cooling_in_a_modern_rose_greenhouse, Stanghellini_A_Model_of_Humidity_1995}. The condensation vapor humidity model in \eqref{H:Hvc} is adopted from \cite{Stanghellini_A_Model_of_Humidity_1995, Bontsema_Jan_Online_estimation_of_the_transpiration}. The CO$_2$ assimilation model in \eqref{C:Cass} is adopted from \cite{PJM_Optimal_control_of_greenhouse, Stanghellini_ISHS_2008, Stanghellini_ISHS_2012}.
+
+Hereafter, we introduce the intermediate variables. 
+
+\begin{align}
+& T^{\mathrm{i-o}} = T^{\mathrm{in}} - T^{\mathrm{out}}\\
+& V^{\mathrm{vent}} =
+\bar{V}^{\mathrm{fan}} \cdot U^{\mathrm{fan}}+
+\bar{V}^{\mathrm{nat}} \cdot U^{\mathrm{nat}} +
+\frac{\lambda^{\mathrm{leak}} \cdot V^{\mathrm{gh}}}{3600}
+\end{align}
+
+We follow references \cite{PJM_Minimal_heating_and_cooling_in_a_modern_rose_greenhouse, Stanghellini_A_Model_of_Humidity_1995, Bontsema_Jan_Online_estimation_of_the_transpiration, Goudriaan_A_Mathematical_Function_for_Crop_Growth} to calculate $g^{\mathrm{tran}}$:
+\begin{align}
+& g^{\mathrm{tran}} = \frac{2 \cdot I}{\left[1 + \eta^{\mathrm{tran}} \cdot \exp \left(\delta^{\mathrm{tran}} \cdot T^{\mathrm{in}}\right)\right] \cdot r^{\mathrm{b}} + r^{\mathrm{s}}}\label{g_tran}\\
+& r^{\mathrm{s}} = \left[\underline{r}^{\mathrm{s}} + \bar{r}^{\mathrm{s}} \cdot \exp \left(-\frac{\tau \cdot R^{\mathrm{cano-abs}}}{I} \right)\right] \cdot \left[1 + \delta^{\mathrm{sr}} \cdot(T^{\mathrm{in}} - T^{\mathrm{sr}})^{2}\right]\\
+& R^{\mathrm{cano-abs}} = \eta^{\mathrm{short}} \cdot \left[\frac{\exp \left(\eta^{\mathrm{ext}} \cdot I \right) - 1}{\exp \left(\eta^{\mathrm{ext}} \cdot I \right)}\right] \cdot R^{\mathrm{cano-glo}}\\
+& R^{\mathrm{cano-glo}} = R^{\mathrm{cano-solar}} + R^{\mathrm{cano-LED}}\\
+& R^{\mathrm{cano-solar}} = \eta^{\mathrm{cover}} \cdot \left(1-\eta^{\mathrm{shad}} \cdot U^{\mathrm{shad}}\right) \cdot R^{\mathrm{out}}\\
+& R^{\mathrm{cano-LED}} = \frac{ \eta^{\mathrm{LED-r}} \cdot \eta^{\mathrm{LED-cano}} \cdot \bar{P}^{\mathrm{LED}} \cdot U^{\mathrm{LED}}}{A^{\mathrm{floor}}}               
+\end{align}
+
+We follow references \cite{PJM_Minimal_heating_and_cooling_in_a_modern_rose_greenhouse, Stanghellini_A_Model_of_Humidity_1995, Bontsema_Jan_Online_estimation_of_the_transpiration} to calculate $H^{\mathrm{cano}}$:
+\begin{align}
+&H^{\mathrm{cano}} = H^{\mathrm{in,sat}}+ \chi \cdot \frac{r^{\mathrm{b}} \cdot R^{\mathrm{cano-abs}}}{2 \cdot I \cdot q^{\mathrm{evap}}}\\
+&H^{\mathrm{in,sat}}  = \tilde{H} \cdot \exp \left(\delta^{\mathrm{sat}} \cdot T^{\mathrm{in}}\right)
+\end{align}
+
+We follow references \cite{Stanghellini_A_Model_of_Humidity_1995, Bontsema_Jan_Online_estimation_of_the_transpiration}  to calculate $g^{\mathrm{vc}}$:
+\begin{align}
+&g^{\mathrm{vc}} = \nu^{\mathrm{surf}} \cdot
+\left[
+\frac{\left(T^{\mathrm{in}} - T^{\mathrm{cover}} \right) + \sqrt{\left(T^{\mathrm{in}} - T^{\mathrm{cover}}\right)^{2} + \sigma^{2}}}
+{2} \right]^{1/3}\\
+&T^{\mathrm{cover}} = \frac{2 \cdot T^{\mathrm{out}} + T^{\mathrm{in}}}{3}
+\end{align}
+
+We follow \cite{Stanghellini_ISHS_2012} to calculate the photon flux density of photosynthetically active radiation, known as photosynthetic photon flux density (PPFD):
+\begin{equation}
+X^{\mathrm{cano}}=\phi^{\mathrm{solar}} \cdot R^{\mathrm{cano-solar}} + \phi^{\mathrm{LED}} \cdot R^{\mathrm{cano-LED}}
+\end{equation}
+
+Next, we define more variables and parameters to build the MPC framework.
+
+The state vector is defined as
+\begin{equation}
+\boldsymbol{x} = 
+\left[
+T^{\mathrm{in}},
+H^{\mathrm{in}},
+C^{\mathrm{in}},
+L^{\mathrm{DLI}}
+\right]^{\top}
+\end{equation}
+
+By default, the initial state vector is set as
+\begin{equation}
+\boldsymbol{x}^{\mathrm{ini}} = \left[
+19   \,\si{\celsius},
+7.41 \,\mathrm{g/m^{3}},
+0.92 \,\mathrm{g/m^{3}},
+0    \,\mathrm{\mathrm{mol/m^{2}}}
+\right]^{\top}
+\end{equation}
+
+The control input vector is defined as
+\begin{equation}
+\boldsymbol{u} =
+\left[
+U^{\mathrm{heat}},
+U^{\mathrm{fan}},
+U^{\mathrm{nat}},
+U^{\mathrm{pad}},
+U^{\mathrm{dos}},
+U^{\mathrm{LED}},
+U^{\mathrm{hum}},
+U^{\mathrm{deh}},
+U^{\mathrm{shad}},
+U^{\mathrm{warm}}
+\right]^{\top}
+\end{equation}
+
+The outdoor disturbance vector is defined as
+\begin{equation}
+\boldsymbol{d} = 
+\left[
+T^{\mathrm{out}},
+H^{\mathrm{out}},
+C^{\mathrm{out}},
+R^{\mathrm{out}}
+\right]^{\top}
+\end{equation}
+
+The nonlinear continuous-time dynamics can be compactly written as
+\begin{equation}\label{state_space_con}
+\dot{\boldsymbol{x}}(t)=f\!\left(\boldsymbol{x}(t),\boldsymbol{u}(t),\boldsymbol{d}(t)\right),
+\end{equation}
+where $f(\cdot)$ is defined by the temperature, humidity, CO$_2$, and DLI dynamics in \eqref{Q}, \eqref{H}, \eqref{C}, and \eqref{DLI}.
+
+Within the MPC framework, the continuous-time state-space model can be discretized using integration with time step $\Delta t$, yielding \eqref{statespace_d}:
+\begin{equation}\label{statespace_d}
+\boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + f(\boldsymbol{x}_{k},\boldsymbol{u}_{k},\boldsymbol{d}_{k}) \cdot \Delta t 
+\end{equation}
+
+\clearpage
+\newpage
+
+\begin{table}[H]
+\scriptsize
+\centering
+\caption{Variables to build the MPC framework.}
+\renewcommand{\arraystretch}{1.20} % <-- increase vertical space
+\begin{tabularx}{\linewidth}{@{}lYl@{}}
+\toprule
+                         & Definition                              & Unit \\
+\midrule
+
+$E^{\mathrm{heat}}_{k}$  & Cost of heating in step $k$.            & \$ \\
+$E^{\mathrm{fan}}_{k}$   & Cost of fan electricity in step $k$.    & \$ \\
+$E^{\mathrm{LED}}_{k}$   & Cost of LED electricity in step $k$.    & \$ \\
+$E^{\mathrm{pad}}_{k}$   & Cost of cooling pad in step $k$.        & \$ \\
+$E^{\mathrm{hum}}_{k}$   & Cost of humidifying in step $k$.        & \$ \\
+$E^{\mathrm{deh}}_{k}$   & Cost of dehumidifying in step $k$.      & \$ \\
+$E^{\mathrm{dos}}_{k}$   & Cost of CO$_2$ dosing in step $k$.      & \$ \\
+
+$k$                  & Step index.                                             & -- \\
+$\kappa_k$           & Time-of-day step index, $\kappa_k \in \{0,\dots,287\}$. & -- \\
+$K$                  & Number of steps.                                        & -- \\
+
+$S^{\mathrm{T+}}_{k}, S^{\mathrm{T-}}_{k}$   & Slacking variables.   & $\si{\celsius}$    \\
+
+$S^{\mathrm{H+}}_{k}, S^{\mathrm{H-}}_{k}$   & Slacking variables.   & $\mathrm{g/m^{3}}$ \\
+
+$S^{\mathrm{C+}}_{k}, S^{\mathrm{C-}}_{k}$   & Slacking variables.   & $\mathrm{g/m^{3}}$ \\
+
+$S^{\mathrm{L}}_{k}$                         & Shortage of daily light integral. & $\mathrm{mol/m^{2}}$ \\
+
+\bottomrule 
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\scriptsize
+\centering
+\caption{Parameters to build the MPC framework (values shown as day/night when applicable).}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\linewidth}{@{}p{0.07\linewidth} p{0.35\linewidth} p{0.33\linewidth} Y@{}}
+\toprule
+                          & Definition & Value & Unit \\
+\midrule
+$\alpha^{\mathrm{heat}}$  & Price of heating.                & 0.05     & $\mathrm{\$/kWh}$ \\
+$\alpha^{\mathrm{fan}}$   & Price of ventilation.            & 0.125    & $\mathrm{\$/kWh}$ \\
+$\alpha^{\mathrm{LED}}$   & Price of LED lighting.           & 0.125    & $\mathrm{\$/kWh}$ \\
+$\alpha^{\mathrm{pad}}$   & Price of using cooling pads.     & 1.48e-6  & $\mathrm{\$/g}$\\
+$\alpha^{\mathrm{hum}}$   & Price of humidifying.            & 4.79e-6  & $\mathrm{\$/g}$\\
+$\alpha^{\mathrm{deh}}$   & Price of dehumidifying.          & 6.5e-5   & $\mathrm{\$/g}$\\
+$\alpha^{\mathrm{dos}}$   & Price of CO$_2$ dosing.          & 1.5e-4   & $\mathrm{\$/g}$\\
+
+
+$S^{\mathrm{fan}}$ & Specific fan power. & 93.4 & $\mathrm{W/(m^{3}/s)}$ \\
+$\Delta t$ & Time interval.          & 300  & $\mathrm{s}$ \\
+
+$\bar{T}^{\mathrm{in}}_{k}$       & Upper bound of $T^{\mathrm{in}}_{k}$. & 27/19     & $\si{\celsius}$ \\
+$\underline{T}^{\mathrm{in}}_{k}$ & Lower bound of $T^{\mathrm{in}}_{k}$. & 21/16     & $\si{\celsius}$ \\
+
+$\bar{H}^{\mathrm{in}}_{k}$       & Upper bound of $H^{\mathrm{in}}_{k}$. & 9.54      & $\mathrm{g/m^{3}}$ \\
+$\underline{H}^{\mathrm{in}}_{k}$ & Lower bound of $H^{\mathrm{in}}_{k}$. & 3.89      & $\mathrm{g/m^{3}}$ \\
+
+$\bar{C}^{\mathrm{in}}_{k}$       & Upper bound of $C^{\mathrm{in}}_{k}$. & 2.73/2.73 & $\mathrm{g/m^{3}}$ \\
+$\underline{C}^{\mathrm{in}}_{k}$ & Lower bound of $C^{\mathrm{in}}_{k}$. & 1.64/0     & $\mathrm{g/m^{3}}$ \\
+
+$L^{\star}_{k}$                   & Reference for $L_{k}$.  & $\begin{cases}
+                                                              0, & 0 \le \kappa_k < 72,\\
+                                                              \frac{22\cdot(\kappa_k-72)}{192}, & 72 \le \kappa_k < 264,\\
+                                                              22, & 264 \le \kappa_k \le 287, \end{cases}$
+                                                                                     & $\mathrm{mol/m^{2}}$ \\
+$\lambda^{\mathrm{T+}},\lambda^{\mathrm{T-}}$     & Penalty coefficients. & 100   & $\mathrm{\$/(\si{\celsius})}$\\
+$\lambda^{\mathrm{H+}},\lambda^{\mathrm{H-}}$     & Penalty coefficients. & 100   & $\mathrm{\$/(g/m^{3})}$\\
+$\lambda^{\mathrm{C+}},\lambda^{\mathrm{C-}}$     & Penalty coefficients. & 100   & $\mathrm{\$/(g/m^{3})}$\\
+$\lambda^{\mathrm{L}}$                            & Penalty coefficients. & 100   & $\mathrm{\$/(mol/m^{2})}$\\
+
+$\gamma$   & Discount factor.        & 0.95 & --\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+Cost of resource consumption of the greenhouse during step $k$:
+\begin{align}
+& E^{\mathrm{heat}}_{k} =\alpha^{\mathrm{heat}}\cdot Q^{\mathrm{heat}}_{k} \cdot \frac{\Delta t}{3.6 \times 10^{6}}\\
+& E^{\mathrm{fan}}_{k}  =\alpha^{\mathrm{fan}}\cdot S^{\mathrm{fan}}\cdot\bar{V}^{\mathrm{fan}}\cdot U^{\mathrm{fan}}_{k}\cdot\frac{\Delta t}{3.6\times 10^{6}}\\
+& E^{\mathrm{LED}}_{k}  =\alpha^{\mathrm{LED}} \cdot \bar{P}^{\mathrm{LED}}   \cdot U^{\mathrm{LED}}_{k} \cdot \frac{\Delta t}{3.6\times 10^{6}}\\
+& E^{\mathrm{pad}}_{k}  =\alpha^{\mathrm{pad}}\cdot U^{\mathrm{pad}}_{k} \cdot \Delta t\\
+& E^{\mathrm{hum}}_{k}  =\alpha^{\mathrm{hum}}  \cdot \bar{F}^{\mathrm{hum}}   \cdot U^{\mathrm{hum}}_{k} \cdot \Delta t \\
+& E^{\mathrm{deh}}_{k}=\alpha^{\mathrm{deh}}\cdot \bar{F}^{\mathrm{deh}} \cdot U^{\mathrm{deh}}_{k} \cdot \Delta t\\
+& E^{\mathrm{dos}}_{k}  =\alpha^{\mathrm{dos}}  \cdot \bar{D}^{\mathrm{dos}}   \cdot U^{\mathrm{dos}}_{k} \cdot \Delta t
+\end{align}
+
+The MPC model is given in \eqref{MPC}.
+\begin{subequations}\label{MPC}
+\begin{flalign}
+\min_{\boldsymbol{u}_{0},...,\boldsymbol{u}_{K-1}}
+& \sum_{k=0}^{K-1} \gamma^{k} \left[
+\begin{aligned}
+&  E^{\mathrm{heat}}_{k}
+ + E^{\mathrm{fan}}_{k}
+ + E^{\mathrm{LED}}_{k}
+ + E^{\mathrm{pad}}_{k}
+ + E^{\mathrm{hum}}_{k}
+ + E^{\mathrm{deh}}_{k}
+ + E^{\mathrm{dos}}_{k} \\
+& + \lambda^{\mathrm{T+}} S^{\mathrm{T+}}_{k} + \lambda^{\mathrm{T-}} S^{\mathrm{T-}}_{k}
+  + \lambda^{\mathrm{H+}} S^{\mathrm{H+}}_{k} + \lambda^{\mathrm{H-}} S^{\mathrm{H-}}_{k}\\
+& + \lambda^{\mathrm{C+}} S^{\mathrm{C+}}_{k} + \lambda^{\mathrm{C-}} S^{\mathrm{C-}}_{k}
+  + \lambda^{\mathrm{L}}  S^{\mathrm{L}}_{k}
+\end{aligned}
+\right]                                                                                 \mspace{-400mu} &\notag\\
+\text{s.t.}\quad
+& \boldsymbol{x}_{0} = \boldsymbol{x}^{\mathrm{ini}},                                   \mspace{-400mu} & \\
+& \boldsymbol{x}_{k+1} = \boldsymbol{M} \boldsymbol{x}_k + \boldsymbol{N} \boldsymbol{u}_k + \boldsymbol{O} \boldsymbol{d}_k + \boldsymbol{m},
+\mspace{-400mu} & k = 0,...,K-1 \\
+& \underline{T}^{\mathrm{in}}_{k} - S^{\mathrm{T-}}_{k} \le T^{\mathrm{in}}_{k}\le \bar{T}^{\mathrm{in}}_{k} + S^{\mathrm{T+}}_{k},
+\mspace{-400mu} & k = 0,...,K-1 \\
+& \underline{H}^{\mathrm{in}}_{k} - S^{\mathrm{H-}}_{k} \le H^{\mathrm{in}}_{k}\le \bar{H}^{\mathrm{in}}_{k} + S^{\mathrm{H+}}_{k},
+\mspace{-400mu} & k = 0,...,K-1 \\
+& \underline{C}^{\mathrm{in}}_{k} - S^{\mathrm{C-}}_{k} \le C^{\mathrm{in}}_{k}\le \bar{C}^{\mathrm{in}}_{k} + S^{\mathrm{C+}}_{k},
+\mspace{-400mu} & k = 0,...,K-1 \\
+& S^{\mathrm{L}}_{k} \ge L^{\star}_{k} - L_{k},
+\mspace{-400mu} & k = 0,...,K-1 \\
+& S^{\mathrm{T+}}_{k}, S^{\mathrm{T-}}_{k},  S^{\mathrm{H+}}_{k}, S^{\mathrm{H-}}_{k}, S^{\mathrm{C+}}_{k}, S^{\mathrm{C-}}_{k}, S^{\mathrm{L}}_{k} \geq 0
+\mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{heat}}_{k}      \le Y^{\mathrm{heat}}_{k},       \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{fan}}_{k}       \le Y^{\mathrm{fan}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{nat}}_{k}       \le Y^{\mathrm{nat}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{pad}}_{k}       \le Y^{\mathrm{pad}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{dos}}_{k}       \le Y^{\mathrm{dos}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{LED}}_{k}       \le Y^{\mathrm{LED}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{shad}}_{k}      \le Y^{\mathrm{shad}}_{k},       \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{warm}}_{k}      \le Y^{\mathrm{warm}}_{k},       \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{hum}}_{k}       \le Y^{\mathrm{hum}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& 0 \le U^{\mathrm{deh}}_{k}       \le Y^{\mathrm{deh}}_{k},        \mspace{-400mu} & k = 0,...,K-1 \\
+& U^{\mathrm{fan}}_{k} \geq U^{\mathrm{pad}}_{k},
+\mspace{-400mu} & k = 0,...,K-1 \\
+& U^{\mathrm{fan}}_{k} \le Y^{\mathrm{fan}}_{k},\, U^{\mathrm{dos}}_{k} \le Y^{\mathrm{dos}}_{k},\, Y^{\mathrm{fan}}_{k} + Y^{\mathrm{dos}}_{k} \le 1
+\mspace{-400mu} & k = 0,...,K-1 \\
+& U^{\mathrm{hum}}_{k} \le Y^{\mathrm{hum}}_{k},\, U^{\mathrm{deh}}_{k} \le Y^{\mathrm{deh}}_{k},\, Y^{\mathrm{hum}}_{k} + Y^{\mathrm{deh}}_{k} \le 1
+\mspace{-400mu} & k = 0,...,K-1 \\
+& Y^{\mathrm{heat}}_{k},
+  Y^{\mathrm{fan}}_{k},
+  Y^{\mathrm{nat}}_{k},
+  Y^{\mathrm{pad}}_{k},
+  Y^{\mathrm{dos}}_{k},
+  Y^{\mathrm{LED}}_{k},
+  Y^{\mathrm{hum}}_{k},
+  Y^{\mathrm{deh}}_{k},
+  Y^{\mathrm{shad}}_{k},
+  Y^{\mathrm{warm}}_{k} \in \{0,1\},
+\mspace{-400mu} & \notag\\
+&
+\mspace{-400mu} & k = 0,...,K-1
+\end{flalign}
+\end{subequations}
+where $\Delta \boldsymbol{x}_{k}$ is the state incremental term; $\boldsymbol{M}$, $\boldsymbol{N}$, and $\boldsymbol{O}$ are the discrete-time system matrices, and $\boldsymbol{m}$ is the constant offset term.
+
+
+
+\bibliographystyle{elsarticle-num} 
+\bibliography{cas-refs}
+
+\end{document}

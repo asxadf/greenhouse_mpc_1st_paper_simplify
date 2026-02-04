@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{PJM_Minimal_heating_and_cooling_in_a_modern_rose_greenhouse}
+P.~J.~M. Van~Beveren, J.~Bontsema, G.~Van~Straten, E.~J. Van~Henten, Minimal
+  heating and cooling in a modern rose greenhouse, Applied Energy 137 (2015)
+  97--109.
+
+\bibitem{Stanghellini_A_Model_of_Humidity_1995}
+C.~Stanghellini, T.~de~Jong, A model of humidity and its applications in a
+  greenhouse, Agricultural and Forest Meteorology 76~(2) (1995) 129--148.
+
+\bibitem{Bontsema_Jan_Online_estimation_of_the_transpiration}
+J.~Bontsema, J.~Hemming, C.~Stanghellini, P.~De~Visser, E.~van Henten,
+  J.~Budding, T.~Rieswijk, S.~Nieboer, On-line estimation of the transpiration
+  in greenhouse horticulture, Proceedings agricontrol (2007) 29--34Net
+  radiation at crop level.
+
+\bibitem{PJM_Optimal_control_of_greenhouse}
+P.~J.~M. van Beveren, J.~Bontsema, G.~van Straten, E.~J. van Henten, Optimal
+  control of greenhouse climate using minimal energy and grower defined bounds,
+  Applied Energy 159 (2015) 509--519.
+
+\bibitem{Stanghellini_ISHS_2008}
+C.~Stanghellini, L.~Incrocci, J.~C. Gázquez, B.~Dimauro, Carbon dioxide
+  concentration in mediterranean greenhouses: How much lost production?,
+  International Society for Horticultural Science (ISHS), Leuven, Belgium,
+  2008, pp. 1541--1550.
+
+\bibitem{Stanghellini_ISHS_2012}
+C.~Stanghellini, J.~Bontsema, A.~de~Koning, E.~Baeza, An algorithm for optimal
+  fertilization with pure carbon dioxide in greenhouses, International Society
+  for Horticultural Science (ISHS), Leuven, Belgium, 2023, pp. 119--124.
+
+\bibitem{Goudriaan_A_Mathematical_Function_for_Crop_Growth}
+J.~Goudriaan, J.~L. Monteith, A mathematical function for crop growth based on
+  light interception and leaf-area expansion, Annals of Botany 66~(6) (1990)
+  695--701.
+
+\end{thebibliography}

@@ -1,0 +1,13 @@
+# configs/setting_base_mpc_deterministic.yaml
+controller:
+  type: "qmpc"
+
+model:
+  kind: "affine_incremental"
+  affine_dynamics_dir: "../../data/for_fitting_LMPC/fitted_matrices/one_step_sklearn_affine"
+  matrix_preference_order:
+    - "model_matrices.npz"
+    - "readable_exports/*.csv"
+
+solver:
+  name: "gurobi"

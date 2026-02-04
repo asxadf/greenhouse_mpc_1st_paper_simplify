@@ -3,50 +3,66 @@
 indoor_climate_model_parameters:
   # indoor_climate_model_parameters.yaml
   # Flat, human-friendly keys; per-item comments: Definition | Unit
+  # Order follows the parameter/variable tables (top-to-bottom).
 
+  # ---- Parameters (table order) ----
   A_floor:        421       # Floor area. | m^2
   A_roof:         472       # Roof area. | m^2
   A_wall:         628       # Side-wall area. | m^2
-  V_gh:           3351      # Indoor volume. | m^3
 
   c_vh:           1230      # Air volumetric heat capacity. | J/(m^3·°C)
-
-  upsilon_roof:   6.6       # Heat-transfer coefficient of roofs. | W/(m^2·°C)
-  upsilon_wall:   6.3       # Heat-transfer coefficient of side walls. | W/(m^2·°C)
-
-  V_bar_fan:      48        # Maximum mechanical ventilation rate. | m^3/s
-  V_bar_nat:      5         # Maximum natural ventilation rate. | m^3/s
-  lambda_leak:    1         # Air leakage rate. | h^-1
-
-  Q_bar_heat:     236000    # Maximum power from heaters. | W
-  P_bar_LED:      43750     # Maximum electrical power of LEDs. | W
-  DeltaT_pad:     5         # Air temperature drop due to cooling pads. | °C
-  q_evap:         2430      # Latent heat of evaporation. | J/g
-
   C_hat_in:       0.23      # CO2 half-saturation constant. | g/m^3
+
   D_bar_dos:      1.04      # Maximum CO2 dosing rate. | g/s
-  D_bar_ass:      0.0022    # Maximum CO2 assimilation flux. | g/(m^2·s)
+  D_bar_ass:      2.2e-3    # Maximum CO2 assimilation flux. | g/(m^2·s)
 
   F_bar_hum:      18        # Maximum injection rate of mist water. | g/s
   F_bar_dehum:    12        # Maximum moisture removal rate. | g/s
-  nu_surf:        0.0018    # Condensation surface coefficient. | m/(°C^(1/3)·s)
 
-  L:              2.5       # Leaf area index. | m^2/m^2
-  tau:            0.4       # Crop-specific coefficient. | m^2/W
-  rho:            0.0015    # PPFD response coefficient. | (m^2·s)/umol
+  H_tilde:        5.5638    # Empirical coefficient. | g/m^3
+
+  I:              2.5       # Leaf area index. | m^2/m^2
+
+  rho:            1.5e-3    # PPFD response coefficient. | (m^2·s)/umol
+  P_bar_LED:      4.375e4   # Maximum electrical power of LEDs. | W
+
+  q_evap:         2430      # Latent heat of evaporation. | J/g
+  Q_bar_heat:     2.36e5    # Maximum power from heaters. | W
+  Q_bar_pad:      2.95e5    # Maximum power from cooling pads. | W
+
   r_b:            200       # Boundary layer resistance. | s/m
   r_bar_s:        570       # Maximum additional resistance. | s/m
   r_under_s:      82        # Minimal stomatal resistance. | s/m
 
+  tau:            0.4       # Crop-specific coefficient. | m^2/W
   T_sr:           24.5      # Reference temperature. | °C
-  sigma:          0.001     # Smoothing coefficient. | °C
+
+  upsilon_roof:   6.6       # Heat-transfer coefficient of roofs. | W/(m^2·°C)
+  upsilon_wall:   6.3       # Heat-transfer coefficient of side walls. | W/(m^2·°C)
+  nu_surf:        1.8e-3    # Condensation surface coefficient. | m/(°C^(1/3)·s)
+
+  V_gh:           3.351e3   # Indoor volume. | m^3
+  V_bar_fan:      48        # Maximum mechanical ventilation rate. | m^3/s
+  V_bar_nat:      5         # Maximum natural ventilation rate. | m^3/s
+
+  omega_T:        30        # Temperature buffering coefficient. | -
+  omega_H:        15        # Humidity buffering coefficient. | -
+  omega_C:        1         # CO2 buffering coefficient. | -
+
+  chi:            2.5       # Latent-to-sensible ratio (sat air). | -
+
+  phi_solar:      2         # Solar radiation-to-PPFD coefficient. | umol/(W·s)
+  phi_LED:        5.17      # LED radiation-to-PPFD coefficient. | umol/(W·s)
+
+  lambda_leak:    1         # Air leakage rate. | h^-1
+
+  zeta:           0.2522    # Empirical coefficient. | g/(m^3·°C)
+  sigma:          1e-3      # Smoothing coefficient. | °C
+
   delta_tran:     0.0518    # Temperature sensitivity coefficient. | °C^-1
   delta_sat:      0.0572    # Temperature sensitivity coefficient. | °C^-1
   delta_vc:       0.0485    # Temperature sensitivity coefficient. | °C^-1
   delta_sr:       0.023     # Temperature sensitivity coefficient. | °C^-2
-
-  phi_solar:      2         # Solar radiation-to-PPFD coefficient. | umol/(W·s)
-  phi_LED:        5.17      # LED radiation-to-PPFD coefficient. | umol/(W·s)
 
   eta_LED_r:      0.59      # Fraction of LED electrical power emitted as radiation (light). | -
   eta_LED_cano:   0.4       # Attenuation of LED radiation to canopy. | -
@@ -54,155 +70,66 @@ indoor_climate_model_parameters:
   eta_cover:      0.5       # Cover shortwave transmissivity. | -
   eta_short:      0.86      # Shortwave absorption ratio. | -
   eta_ext:        0.7       # Light extinction coefficient. | -
+  eta_tran:       0.7584    # Empirical coefficient. | -
   eta_shad:       0.35      # Radiation attenuation of shading screen. | -
   eta_warm:       0.5       # Heat insulation of warm-keeping screen. | -
 
-  chi:            2.5       # Latent-to-sensible ratio (sat air). | -
-  omega_Q:        30        # Thermal inertia coefficient. | -
-  omega_F:        15        # Humidity buffering coefficient. | -
+  # ---- Variables (table order) ----
+  C_in:           null      # Indoor CO2 absolute concentration. | g/m^3
+  C_out:          null      # Outdoor CO2 absolute concentration. | g/m^3
 
-  H_tilde:        5.5638    # Empirical coefficient. | g/m^3
-  zeta:           0.2522    # Empirical coefficient. | g/(m^3·°C)
+  D_dos:          null      # CO2 dosing rate. | g/s
+  D_vent:         null      # CO2 changing rate due to ventilation. | g/s
+  D_ass:          null      # CO2 assimilation rate. | g/s
 
-  beta_C:         549.2     # CO2 unit conversion factor. | ppm·m^3/g
-  xi:             0.1362    # Scaled vapor gas constant at 22°C. | kPa·m^3/g
+  F_cool:         null      # Humidifying rate due to cooling pads and humidifiers. | g/s
+  F_dehum:        null      # Dehumidifying rate. | g/s
+  F_vent:         null      # Humidity changing rate due to venting. | g/s
+  F_tran:         null      # Humidity changing rate due to transpiration. | g/s
+  F_vc:           null      # Humidity changing rate due to vapor condensing. | g/s
 
-  # State vector: x(t) = [T_in, H_in, C_in, L_DLI]^T
-  state_vector:
-    - T_in        # Indoor temperature. | °C
-    - H_in        # Indoor absolute humidity. | g/m^3
-    - C_in        # Indoor CO2 absolute concentration. | g/m^3
-    - L_DLI       # Daily light integral (resets to 0 at 00:00). | mol/m^2
+  g_vc:           null      # Vapor condensing coefficient. | m/s
+  g_tran:         null      # Transpiration conductance. | m/s
 
-  # Initial state vector: x_ini
-  x_ini:
-    T_in:   19      # Indoor temperature. | °C
-    H_in:   7.41    # Indoor absolute humidity. | g/m^3
-    C_in:   0.92    # Indoor CO2 absolute concentration. | g/m^3
-    L_DLI:  0       # Daily light integral (resets to 0 at 00:00). | mol/m^2
+  H_in:           null      # Indoor absolute humidity. | g/m^3
+  H_in_sat:       null      # Indoor saturation absolute humidity. | g/m^3
+  H_out:          null      # Outdoor absolute humidity. | g/m^3
+  H_cano:         null      # Absolute humidity at canopy. | g/m^3
 
-  # Control input vector: u(t)
-  control_vector:
-    - U_heat        # Heater actuation level. | -
-    - U_fan         # Ventilation fan speed level. | -
-    - U_nat         # Natural ventilation opening ratio. | -
-    - U_pad         # Evaporative cooling pad wetness level. | -
-    - U_dos         # CO2 dosing rate command. | -
-    - U_LED         # LED electric power command. | -
-    - U_hum         # Humidification rate command. | -
-    - U_dehum       # Dehumidification rate command. | -
-    - U_scre_shad   # Shading screen closure fraction. | -
-    - U_scre_warm   # Warm-keep screen closure ratio. | -
+  L:              null      # Daily light integral (resets to 0 at 00:00). | mol/m^2
 
-  # Outdoor disturbance vector: d(t)
-  disturbance_vector:
-    - T_out        # Outdoor temperature. | °C
-    - H_out        # Outdoor absolute humidity. | g/m^3
-    - C_out        # Outdoor CO2 absolute concentration. | g/m^3
-    - R_out        # Outdoor radiation. | W/m^2
+  Q_heat:         null      # Heat-gain power due to heaters. | W
+  Q_vent:         null      # Heat-exchange power due to ventilation. | W
+  Q_cool:         null      # Heat-loss power due to cooling systems. | W
+  Q_solar:        null      # Heat-gain power due to solar radiation. | W
+  Q_i_o:          null      # Heat-exchange power due to T_i_o. | W
+  Q_LED:          null      # Heat-gain power due to LEDs. | W
+  Q_tran:         null      # Heat-loss power due to transpiration. | W
 
-mpc_global_parameters:
-  # Flat, LaTeX-mappable keys + per-item comments: Definition | Unit
-  # Notes:
-  # - Daytime is 06:00–22:00; other times are nighttime (used for day/night bounds and weights).
+  r_s:            null      # Canopy stomatal resistance. | s/m
+  R_cano_abs:     null      # Canopy-absorbed radiation. | W/m^2
+  R_cano_glo:     null      # Global radiation at canopy. | W/m^2
+  R_cano_solar:   null      # Solar radiation at canopy. | W/m^2
+  R_cano_LED:     null      # LED radiation at canopy. | W/m^2
+  R_out:          null      # Outdoor radiation. | W/m^2
 
-  # ----------------------------
-  # Prices / economic parameters
-  # ----------------------------
-  alpha_heat:     0.05       # Price of heating. | $/kWh
-  alpha_elec:     0.125      # Price of electricity. | $/kWh
-  alpha_water:    1.48e-06   # Price of water. | $/g
-  alpha_hum:      4.79e-06   # Price of humidifying. | $/g
-  alpha_dehum:    6.5e-05    # Price of dehumidifying. | $/g
-  alpha_dos:      0.00015    # Price of CO2 dosing. | $/g
+  t:             null      # Time. | s
+  T_out:         null      # Outdoor temperature. | °C
+  T_in:          null      # Indoor temperature. | °C
+  T_cover:       null      # Covering temperature. | °C
+  T_i_o:         null      # Indoor–outdoor temperature difference. | °C
 
-  # ----------------------------
-  # Unit conversion / constants
-  # ----------------------------
-  beta_C:         549.2      # CO2 unit conversion factor. | ppm·m^3/g
-  xi:             0.4615     # Water vapor gas constant. | J/(g·K)
+  U_heat:        null      # Actuation of heater power. | -
+  U_fan:         null      # Actuation of ventilation fan speed. | -
+  U_nat:         null      # Actuation of natural ventilation opening ratio. | -
+  U_pad:         null      # Actuation of cooling pad wetness level. | -
+  U_dos:         null      # Actuation of CO2 dosing rate. | -
+  U_LED:         null      # Actuation of LED electric power. | -
+  U_shad:        null      # Actuation of shading screen closure. | -
+  U_warm:        null      # Actuation of warm-keeping screen closure. | -
+  U_hum:         null      # Actuation of humidification rate. | -
+  U_deh:         null      # Actuation of dehumidification rate. | -
 
-  # ----------------------------
-  # MPC horizon / timing settings
-  # ----------------------------
-  K:              6         # Number of total steps. | -
-  Delta_t:        300        # Time interval. | s
-  gamma:          0.99       # Discount factor. | -
+  V_vent:        null      # Total ventilation. | m^3/s
 
-  # ----------------------------
-  # Equipment-related parameters
-  # ----------------------------
-  S_fan:          93.4       # Specific fan power. | W/(m^3/s)
-
-  # ----------------------------
-  # Indoor climate bounds
-  # ----------------------------
-  T_in_bar:                  # Upper bound of indoor temperature (day/night). | °C
-    day:        25.0
-    night:      19.0
-  T_in_under:                # Lower bound of indoor temperature (day/night). | °C
-    day:        23.0
-    night:      18.0
-
-  Z_in_bar:       1.3        # Upper bound of indoor vapor pressure deficit. | kPa
-  Z_in_under:     0.53       # Lower bound of indoor vapor pressure deficit. | kPa
-
-  B_in_bar:                  # Upper bound of indoor CO2 mixing ratio (day/night). | ppm
-    day:        1050.0
-    night:      2000.0
-  B_in_under:                # Lower bound of indoor CO2 mixing ratio (day/night). | ppm
-    day:         950.0
-    night:         0.0
-
-  # ----------------------------
-  # Tracking weights / penalties
-  # ----------------------------
-  lambda_T:       1       # Tracking coefficient for T_in. | $/°C^2
-  lambda_Z:       1       # Tracking coefficient for Z_in. | $/kPa^2
-  lambda_B:                # Tracking coefficient for B_in (day/night). | $/ppm^2
-    day:        1
-    night:      0.0
-  lambda_L:       100        # Tracking coefficient for L_DLI shortage. | $/(mol^2/m^4)
-
-  lambda_T_plus:  100       # Penalty for T_in upper slack S^{T+}. | $/°C
-  lambda_T_minus: 100       # Penalty for T_in lower slack S^{T-}. | $/°C
-  lambda_Z_plus:  100       # Penalty for Z_in upper slack S^{Z+}. | $/kPa
-  lambda_Z_minus: 100       # Penalty for Z_in lower slack S^{Z-}. | $/kPa
-  lambda_B_plus:  100       # Penalty for B_in upper slack S^{B+}. | $/ppm
-  lambda_B_minus: 100       # Penalty for B_in lower slack S^{B-}. | $/ppm
-  # ----------------------------
-  # DLI reference profile settings
-  # ----------------------------
-  L_DLI_target:   22.0       # Target daily light integral (end-of-day). | mol/m^2
-  L_DLI_profile:             # Profile shape in time-of-day steps (kappa). | -
-  #  ramp_start_step:       72    # 06:00 for 5-min steps. | step
-    ramp_start_step:       72    # 06:00 for 5-min steps. | step
-    ramp_end_step:        264    # 22:00 for 5-min steps. | step
-    target_hold_end_step: 287    # End of day. | step
-  use_midpoint_of_bounds: true   # Use midpoint of bounds for references. | -
-
-  # ----------------------------
-  # Time-of-day / calendar settings
-  # ----------------------------
-  steps_per_day:   288       # Number of discrete time steps per day. | step/day
-  day_start_hhmm: "06:00"    # Start time of "day". | HH:MM
-  day_end_hhmm:   "22:00"    # End time of "day". | HH:MM
-  day_transition_minutes: 60   # length of ramp at day start/end | minutes
-
-  # ----------------------------
-  # Physical validity guards (optional)
-  # ----------------------------
-  physical_guards:
-    enabled: true   # Apply post-step projection to keep humidity/CO2 physical. | bool
-    c_min: 0.0      # Minimum CO2 concentration (g/m^3). | g/m^3
-    h_min: 0.0      # Minimum absolute humidity (g/m^3). | g/m^3
-    h_max: null     # Optional cap on absolute humidity (g/m^3); null uses saturation. | g/m^3
-
-  # Saturation absolute humidity at 22°C. | g/m^3
-  H_tilde_sat:    19.4
-
-  # Optional: limit simulation length to N days (uses steps_per_day from keeper)
-  simulation_days: 1
-
-  # Soft penalties for actuator movement (helps smooth solutions)
-  input_rate_penalty:  1.0e-3
+  X_cano:        null      # PPFD at canopy. | umol/(m^2·s)
