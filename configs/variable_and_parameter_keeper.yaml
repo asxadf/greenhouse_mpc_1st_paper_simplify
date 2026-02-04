@@ -58,6 +58,8 @@ indoor_climate_model_parameters:
 
   zeta:           0.2522    # Empirical coefficient. | g/(m^3·°C)
   sigma:          1e-3      # Smoothing coefficient. | °C
+  delta_t:        300       # Time interval. | s
+
 
   delta_tran:     0.0518    # Temperature sensitivity coefficient. | °C^-1
   delta_sat:      0.0572    # Temperature sensitivity coefficient. | °C^-1
